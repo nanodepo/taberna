@@ -27,7 +27,7 @@ new class extends Component {
     {
         $attrs = $this->product->category->attributes()->where('is_variant_defining', true)->get();
         $attrs->load('options');
-        $attrs->each(function (Attribute $attr) {
+        $attrs->each(function (\NanoDepo\Taberna\Models\Attribute $attr) {
             $count = $attr->options->where('product_id', $this->product->id)->isEmpty()
                 ? $attr->options->where('product_id', null)->count()
                 : $attr->options->where('product_id', $this->product->id)->count();

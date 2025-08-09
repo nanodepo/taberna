@@ -12,28 +12,28 @@ class CategorySeeder extends Seeder
     {
         tap(
             CategoryFactory::new()->extra([
-                'name' => 'Лабораторное оборудование',
-                'slug' => str('Лабораторное оборудование')->slug()->value(),
+                'name' => 'Aetheric Weaving',
+                'slug' => str('Aetheric Weaving')->slug()->value(),
             ])->create(),
             function(Category $category) {
                 tap(
                     CategoryFactory::new()->extra([
                         'category_id' => $category->id,
-                        'name' => 'Микроскопы',
-                        'slug' => str('Микроскопы')->slug()->value(),
+                        'name' => 'Lumina Textiles',
+                        'slug' => str('Lumina Textiles')->slug()->value(),
                     ])->create(),
                     function(Category $category) {
                         CategoryFactory::new()->extra([
                             'category_id' => $category->id,
-                            'name' => 'Бинокулярные микроскопы',
-                            'slug' => str('Бинокулярные микроскопы')->slug()->value(),
+                            'name' => 'Stardust Silks',
+                            'slug' => str('Stardust Silks')->slug()->value(),
                             'is_virtual' => true,
                         ])->create();
 
                         CategoryFactory::new()->extra([
                             'category_id' => $category->id,
-                            'name' => 'Тринокулярные микроскопы',
-                            'slug' => str('Тринокулярные микроскопы')->slug()->value(),
+                            'name' => 'Echo-Weave Fabrics',
+                            'slug' => str('Echo-Weave Fabrics')->slug()->value(),
                             'is_virtual' => true,
                         ])->create();
                     }
@@ -41,26 +41,48 @@ class CategorySeeder extends Seeder
 
                 CategoryFactory::new()->extra([
                     'category_id' => $category->id,
-                    'name' => 'Центрифуги',
-                    'slug' => str('Центрифуги')->slug()->value(),
+                    'name' => 'Celestial Armory',
+                    'slug' => str('Celestial Armory')->slug()->value(),
                 ])->create();
 
                 CategoryFactory::new()->extra([
                     'category_id' => $category->id,
-                    'name' => 'Спектрофотометры',
-                    'slug' => str('Спектрофотометры')->slug()->value(),
+                    'name' => 'Ephemeral Adornments',
+                    'slug' => str('Ephemeral Adornments')->slug()->value(),
                 ])->create();
             }
         );
 
         CategoryFactory::new()->extra([
-            'name' => 'Медицинская техника',
-            'slug' => str('Медицинская техника')->slug()->value(),
+            'name' => 'Geode Gardens',
+            'slug' => str('Geode Gardens')->slug()->value(),
         ])->create();
 
         CategoryFactory::new()->extra([
-            'name' => 'Аптечная тара',
-            'slug' => str('Аптечная тара')->slug()->value(),
+            'name' => 'Alchemist\'s Pantry',
+            'slug' => str('Alchemist\'s Pantry')->slug()->value(),
         ])->create();
+
+        tap(
+            CategoryFactory::new()->extra([
+                'name' => 'Mechanica Anima',
+                'slug' => str('Mechanica Anima')->slug()->value(),
+            ])->create(),
+            function(Category $category) {
+                CategoryFactory::new()->extra([
+                    'category_id' => $category->id,
+                    'name' => 'Clockwork Critters',
+                    'slug' => str('Clockwork Critters')->slug()->value(),
+                    'is_virtual' => true,
+                ])->create();
+
+                CategoryFactory::new()->extra([
+                    'category_id' => $category->id,
+                    'name' => 'Astro-Navigation Tools',
+                    'slug' => str('Astro-Navigation Tools')->slug()->value(),
+                    'is_virtual' => true,
+                ])->create();
+            }
+        );
     }
 }

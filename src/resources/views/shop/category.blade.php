@@ -37,6 +37,7 @@ class extends Component {
                         :title="$category->name"
                         :subtitle="$category->intro"
                         :href="route('category', $category->slug)"
+                        wire:navigate
                     />
                 </div>
             @endforeach

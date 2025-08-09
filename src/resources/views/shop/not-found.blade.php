@@ -34,8 +34,16 @@
 
         <x-slot name="content">
 
-            <x-ui::section>
-                // 404
+            <x-ui::section class="mt-0 sm:mt-3">
+
+                <x-taberna::navbar />
+
+                <x-ui::header title="404" subtitle="UFO came and stole this page" class="my-6" />
+
+                <div class="flex flex-row">
+                    <x-ui::button before="arrow-long-left" :href="route('home')" color="tertiary" variant="text">Back to Home</x-ui::button>
+                </div>
+
             </x-ui::section>
 
         </x-slot>

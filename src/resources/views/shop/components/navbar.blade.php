@@ -1,17 +1,17 @@
-<x-ui::nav.panel x-data x-cloak class="-mt-3 -mx-3 mb-3">
+<x-ui::nav.panel class="-mt-3 -mx-3 mb-3">
     <x-slot name="left">
-        <x-logo text="Taberna" :href="route('home')" icon="nanodepo" />
+        <x-logo text="Taberna" :href="route('home')" icon="nanodepo" wire:navigate />
     </x-slot>
 
     <x-slot name="right" class="gap-3">
         @livewire('switch-mode')
 
         @if(auth()->check())
-            <a href="{{ route('profile.show') }}">
+            <a href="{{ route('profile.show') }}" wire:navigate>
                 <x-ui::avatar :url="thumbnail(auth()->user()->avatar, '96x96', 'profile')" class="w-9 h-9" />
             </a>
         @else
-            <x-ui::circle :href="route('auth.login')" icon="arrow-right-end-on-rectangle" />
+            <x-ui::circle :href="route('auth.login')" icon="arrow-right-end-on-rectangle" wire:navigate />
         @endif
     </x-slot>
 </x-ui::nav.panel>

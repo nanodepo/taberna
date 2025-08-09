@@ -8,10 +8,9 @@ use NanoDepo\Taberna\Controllers\SitemapController;
 Volt::route('/', 'shop.home')->name('home');
 
 Volt::route('/c', 'shop.category')->name('categories');
-Volt::route('/c/{category:slug}', 'shop.category.show')->name('category');
-Volt::route('/c/{category:slug}/{product:sku}', 'shop.category.product')->name('product')
-    ->missing(fn () => response()->view(view: 'taberna::not-found', status: 404));
-Volt::route('/c/{category:slug}/{product:sku}/{variant:sku}', 'shop.category.variant')->name('variant');
+Volt::route('/c/{category:slug}', 'shop.category.show')->name('category')->missing(fn () => response()->view(view: 'taberna::not-found', status: 404));
+Volt::route('/c/{category:slug}/{product:sku}', 'shop.category.product')->name('product')->missing(fn () => response()->view(view: 'taberna::not-found', status: 404));
+Volt::route('/c/{category:slug}/{product:sku}/{variant:sku}', 'shop.category.variant')->name('variant')->missing(fn () => response()->view(view: 'taberna::not-found', status: 404));
 
 Volt::route('/page/about-us', 'shop.pages.about-us')->name('about-us');
 Volt::route('/page/delivery', 'shop.pages.delivery')->name('delivery');
@@ -19,7 +18,7 @@ Volt::route('/page/return-policy', 'shop.pages.return-policy')->name('return-pol
 Volt::route('/page/privacy-policy', 'shop.pages.privacy-policy')->name('privacy-policy');
 
 Volt::route('/basket', 'shop.basket')->name('basket');
-Volt::route('/basket/{order}', 'shop.thank-you')->name('thank-you');
+Volt::route('/basket/{order}', 'shop.thank-you')->name('thank-you')->missing(fn () => response()->view(view: 'taberna::not-found', status: 404));
 
 Route::get('/sitemap.xml', SitemapController::class);
 Route::get('/merchant-feed.xml', MerchantCenterController::class);

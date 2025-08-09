@@ -10,8 +10,8 @@ class BrandSeeder extends Seeder
     public function run(): void
     {
         BrandFactory::new()->extra([
-            'name' => 'Micromed',
-            'slug' => 'micromed',
+            'name' => 'NanoDepo',
+            'slug' => 'nanodepo',
         ])->create();
 
         BrandFactory::new()->extra([

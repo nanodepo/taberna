@@ -15,22 +15,22 @@ class AttributeSeeder extends Seeder
     {
         $general = GroupFactory::new()
             ->extra([
-                'title' => 'Параметры',
-                'description' => 'Основные характеристики товара',
+                'title' => 'Dimensions',
+                'description' => 'Main parameters of the product',
             ])
             ->create();
 
         $other = GroupFactory::new()
             ->extra([
-                'title' => 'Другое',
-                'description' => 'Параметры которые не подходят к другим разделам',
+                'title' => 'Other',
+                'description' => 'Parameters that do not fit other sections',
             ])
             ->create();
 
         AttributeFactory::new()
             ->extra([
                 'group_id' => $general->id,
-                'name' => 'Высота',
+                'name' => 'Height',
                 'code' => 'weight',
                 'type' => AttributeType::Input->value,
                 'is_variant_defining' => false,
@@ -42,7 +42,7 @@ class AttributeSeeder extends Seeder
         AttributeFactory::new()
             ->extra([
                 'group_id' => $general->id,
-                'name' => 'Ширина',
+                'name' => 'Width',
                 'code' => 'height',
                 'type' => AttributeType::Input->value,
                 'is_variant_defining' => false,
@@ -54,7 +54,7 @@ class AttributeSeeder extends Seeder
         AttributeFactory::new()
             ->extra([
                 'group_id' => $general->id,
-                'name' => 'Вес',
+                'name' => 'Weight',
                 'code' => 'weight',
                 'type' => AttributeType::Input->value,
                 'is_variant_defining' => false,
@@ -67,7 +67,7 @@ class AttributeSeeder extends Seeder
             AttributeFactory::new()
                 ->extra([
                     'group_id' => $other->id,
-                    'name' => 'Цвет',
+                    'name' => 'Color',
                     'code' => 'color',
                     'type' => AttributeType::Color->value,
                     'is_variant_defining' => true,
@@ -78,14 +78,20 @@ class AttributeSeeder extends Seeder
             function (Attribute $attribute) {
                 OptionFactory::new()->extra([
                     'attribute_id' => $attribute->id,
-                    'name' => 'Pink Red',
-                    'code' => 'ff5252',
+                    'name' => 'Silver Blue',
+                    'code' => '8a9edc',
                 ])->create();
 
                 OptionFactory::new()->extra([
                     'attribute_id' => $attribute->id,
-                    'name' => 'Cold Blue',
-                    'code' => '0088cc',
+                    'name' => 'Soft Moon',
+                    'code' => 'f5d69d',
+                ])->create();
+
+                OptionFactory::new()->extra([
+                    'attribute_id' => $attribute->id,
+                    'name' => 'Ocean',
+                    'code' => '8ec7d2',
                 ])->create();
             }
         );

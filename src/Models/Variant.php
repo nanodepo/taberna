@@ -20,7 +20,6 @@ class Variant extends Model
         'product_id',
         'sku',
         'price',
-        'partner_price',
         'discount',
         'quantity',
         'is_active',
@@ -30,7 +29,6 @@ class Variant extends Model
     {
         return [
             'price' => PriceCast::class,
-            'partner_price' => PriceCast::class,
         ];
     }
     public function product(): BelongsTo

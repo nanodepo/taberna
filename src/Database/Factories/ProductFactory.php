@@ -23,6 +23,7 @@ class ProductFactory extends Factory
             'quantity' => fake()->numberBetween(1, 10),
             'is_active' => true,
             'has_variants' => false,
+            'is_main' => false,
         ];
     }
 
