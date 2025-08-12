@@ -10,7 +10,7 @@ Volt::route('/', 'shop.home')->name('home');
 Volt::route('/c', 'shop.category')->name('categories');
 Volt::route('/c/{category:slug}', 'shop.category.show')->name('category')->missing(fn () => response()->view(view: 'taberna::not-found', status: 404));
 Volt::route('/c/{category:slug}/{product:sku}', 'shop.category.product')->name('product')->missing(fn () => response()->view(view: 'taberna::not-found', status: 404));
-Volt::route('/c/{category:slug}/{product:sku}/{variant:sku}', 'shop.category.variant')->name('variant')->missing(fn () => response()->view(view: 'taberna::not-found', status: 404));
+Volt::route('/c/{category:slug}/{product:sku}/{variant:sku}', 'shop.category.product')->name('variant')->missing(fn () => response()->view(view: 'taberna::not-found', status: 404));
 
 Volt::route('/page/about-us', 'shop.pages.about-us')->name('about-us');
 Volt::route('/page/delivery', 'shop.pages.delivery')->name('delivery');

@@ -14,7 +14,7 @@ class VariantFactory extends Factory
         return [
             'product_id' => $this->product->id,
             'sku' => str($this->product->sku)->append(fake()->numberBetween(1, 20))->value(),
-            'price' => fake()->numberBetween(100, 1000),
+            'price' => $this->product->price,
             'discount' => fake()->boolean(20) ? fake()->numberBetween(5, 30) : 0,
             'quantity' => fake()->numberBetween(0, 10),
             'is_active' => true,

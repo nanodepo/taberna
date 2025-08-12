@@ -18,14 +18,14 @@ new class extends Component {
 
 <x-ui::layout.single>
     <x-slot name="content">
-        <x-ui::section title="Історія замовлень">
+        <x-ui::section title="Orders history">
             <x-ui::list>
                 @foreach($orders as $order)
                     <x-ui::list.double
                         before="cube"
                         :subhead="$order->status->name"
-                        title="Замовлення №{{ $order->created_at->format('ymdHis') }}"
-                        subtitle="Товарів: {{ $order->items()->count() }} | Сума: {{ price($order->price)->formatted() }}"
+                        title="Order №{{ $order->created_at->format('ymdHis') }}"
+                        subtitle="Products: {{ $order->items()->count() }} | Price: {{ price($order->price)->formatted() }}"
                         after="eye"
                         :href="route('profile.order.show', $order->id)"
                     />

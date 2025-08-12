@@ -8,37 +8,46 @@ new class extends Component {
     public Order $order;
 } ?>
 
-<x-ui::section title="Order №{{ $order->created_at->format('ymdHis') }}">
+<x-ui::section x-data="{ opened: false }">
+    <div class="flex flex-row justify-between items-center">
+        <x-ui::title
+            title="Order №{{ $order->created_at->format('ymdHis') }}"
+            :subtitle="$order->status->name"
+        />
+
+        <x-ui::circle x-on:click="opened = !opened" icon="chevron-left" x-bind:class="{ '-rotate-90': opened }" />
+    </div>
+
     <div class="my-3">
         <x-ui::steps>
             <x-ui::steps.item
-                :title="OrderStatus::Pending->title()"
+                :title="OrderStatus::Pending->name"
                 :active="$order->status == OrderStatus::Pending"
                 :completed="$order->status == OrderStatus::Completed || $order->status == OrderStatus::Sent || $order->status == OrderStatus::Processing"
                 first
             />
 
             <x-ui::steps.item
-                :title="OrderStatus::Processing->title()"
+                :title="OrderStatus::Processing->name"
                 :active="$order->status == OrderStatus::Processing"
                 :completed="$order->status == OrderStatus::Completed || $order->status == OrderStatus::Sent"
             />
 
             <x-ui::steps.item
-                :title="OrderStatus::Sent->title()"
+                :title="OrderStatus::Sent->name"
                 :active="$order->status == OrderStatus::Sent"
                 :completed="$order->status == OrderStatus::Completed"
             />
 
             <x-ui::steps.item
-                :title="OrderStatus::Completed->title()"
+                :title="OrderStatus::Completed->name"
                 :completed="$order->status == OrderStatus::Completed"
                 last
             />
         </x-ui::steps>
     </div>
 
-    <x-ui::list>
+    <x-ui::list x-collapse x-show="opened">
         <x-ui::list.double
             before="hashtag"
             :title="$order->created_at->format('ymdHis')"

@@ -31,13 +31,13 @@ new class extends Component {
 
         $this->reset('password', 'confirmation');
 
-        $this->alert('Пароль змінено');
+        $this->alert('Updated');
     }
 } ?>
 
-<x-ui::section title="Зміна пароля">
+<x-ui::section title="Password update">
     <form wire:submit="submit" class="flex flex-col gap-3">
-        <x-ui::field wire:model="password" label="Пароль" hint="Використовуйте надійний пароль" max="16">
+        <x-ui::field wire:model="password" label="Password" hint="Use a strong password" max="16">
             <x-ui::input
                 type="password"
                 x-model="field"
@@ -47,7 +47,7 @@ new class extends Component {
             />
         </x-ui::field>
 
-        <x-ui::field wire:model="confirmation" label="Підтвердження паролю" hint="Щоб уникнути помилок, введіть пароль ще раз" max="16">
+        <x-ui::field wire:model="confirmation" label="Password confirmation" hint="To avoid errors, repeat your password" max="16">
             <x-ui::input
                 type="password"
                 x-model="field"
@@ -58,7 +58,7 @@ new class extends Component {
         </x-ui::field>
 
         <div class="flex fle-row justify-end">
-            <x-ui::button type="submit">Зберегти</x-ui::button>
+            <x-ui::button type="submit">Save</x-ui::button>
         </div>
     </form>
 </x-ui::section>

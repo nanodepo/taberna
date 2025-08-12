@@ -41,25 +41,25 @@ new class extends Component {
                 <x-ui::list.icon
                     icon="user"
                     :title="$user->name"
-                    subtitle="Ім'я користувача"
+                    subtitle="Username"
                 />
 
                 <x-ui::list.icon
                     icon="at-symbol"
                     :title="$user->email"
-                    subtitle="Пошта"
+                    subtitle="Email"
                 />
 
                 <x-ui::list.value
                     icon="shopping-cart"
-                    title="Замовлень"
+                    title="Orders"
                 >
                     {{ $orders->count() }}
                 </x-ui::list.value>
 
                 <x-ui::list.button
                     icon="pencil"
-                    title="Редагувати профіль"
+                    title="Edit Profile"
                     :href="route('profile.edit')"
                 />
             </x-ui::list>

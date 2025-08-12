@@ -54,9 +54,9 @@ class Product extends Model
             if (is_null($variant)) {
                 $variant = $this->variants->first();
             }
-            return route('variant', [$this->sku, $variant->sku]);
+            return route('variant', [$this->category->slug, $this->sku, $variant->sku]);
         }
-        return route('product', $this->sku);
+        return route('product', [$this->category->slug, $this->sku]);
     }
 
     public function category(): BelongsTo
@@ -87,7 +87,7 @@ class Product extends Model
 
     public function addons(): BelongsToMany
     {
-        return $this->belongsToMany(Addon::class);
+        return $this->belongsToMany(Addon::class)->where('is_active', true);
     }
 
     public function reviews(): HasMany

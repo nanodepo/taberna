@@ -12,11 +12,31 @@ class extends Component {
 
     public string $search = '';
 
+    private function getCategoryAndChildrenIds($category): array
+    {
+        // Инициализируем массив с ID текущей категории
+        $ids = [$category->id];
+
+        // Проверяем, есть ли у категории дочерние
+        if ($category->children->isNotEmpty()) {
+            // Если есть, проходим по каждой дочерней категории
+            foreach ($category->children as $child) {
+                // Вызываем этот же метод для каждой дочерней категории
+                // и объединяем результаты
+                $ids = array_merge($ids, $this->getCategoryAndChildrenIds($child));
+            }
+        }
+
+        return $ids;
+    }
+
     public function with(): array
     {
         return [
             'categories' => $this->category->children,
-            'products' => $this->category->is_virtual ? $this->category->virtual : $this->category->products,
+            'products' => $this->category->is_virtual
+                ? $this->category->virtual
+                : Product::query()->whereIn('category_id', $this->getCategoryAndChildrenIds($this->category))->get(),
         ];
     }
 } ?>
@@ -44,17 +64,11 @@ class extends Component {
         </x-ui::section>
 
         @if($categories->isNotEmpty())
-            <div class="flex flex-row flex-wrap mx-1.5 sm:-mx-1.5">
-                @foreach($categories as $child)
-                    <div class="flex flex-col w-1/2 p-1.5">
-                        <x-ui::card
-                            :image="$child->image?->thumbnail(500) ?? asset('images/500.svg')"
-                            :title="$child->name"
-                            :subtitle="$child->intro"
-                            :href="route('category', $child->slug)"
-                            wire:navigate
-                        />
-                    </div>
+            <div class="flex flex-row gap-3 px-3 py-6 overflow-x-auto scrollbar-none">
+                @foreach($categories as $category)
+                    <a href="{{ route('category', $category->slug) }}" class="flex flex-col cursor-pointer" wire:navigate>
+                        <x-ui::chip :before="$category->icon" :title="$category->name" />
+                    </a>
                 @endforeach
             </div>
         @endif

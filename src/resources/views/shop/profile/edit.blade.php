@@ -13,9 +13,9 @@ new class extends Component {
 <x-ui::layout.double>
     <x-slot name="breadcrumbs">
         <x-ui::breadcrumbs>
-            <x-ui::breadcrumbs.item :href="route('profile.show')">Особистий кабінет</x-ui::breadcrumbs.item>
+            <x-ui::breadcrumbs.item :href="route('profile.show')">Profile</x-ui::breadcrumbs.item>
             <x-ui::breadcrumbs.divider />
-            <x-ui::breadcrumbs.item active>Редагування профілю</x-ui::breadcrumbs.item>
+            <x-ui::breadcrumbs.item active>Edit</x-ui::breadcrumbs.item>
         </x-ui::breadcrumbs>
     </x-slot>
 

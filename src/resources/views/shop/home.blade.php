@@ -3,7 +3,9 @@
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 use Livewire\Attributes\Url;
+use NanoDepo\Taberna\Enums\OrderStatus;
 use NanoDepo\Taberna\Models\Category;
+use NanoDepo\Taberna\Models\Order;
 use NanoDepo\Taberna\Models\Product;
 
 new
@@ -18,6 +20,11 @@ class extends Component {
         return [
             'categories' => Category::query()->whereNull('category_id')->get(),
             'products' => Product::query()->where('is_main', true)->limit(6)->get(),
+            'order' => auth()->check() ? Order::query()
+                ->where('user_id', auth()->id())
+                ->whereIn('status', [OrderStatus::Pending, OrderStatus::Processing, OrderStatus::Sent])
+                ->orderByDesc('id')
+                ->first() : null,
         ];
     }
 } ?>
@@ -51,6 +58,9 @@ class extends Component {
 
         </x-ui::section>
 
+        @if(!is_null($order))
+            @livewire('sections.order-mini-public-info', ['order' => $order])
+        @endif
 
         <div class="flex flex-row gap-3 px-3 py-6 overflow-x-auto scrollbar-none">
             @foreach($categories as $category)

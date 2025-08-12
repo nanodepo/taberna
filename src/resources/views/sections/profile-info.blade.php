@@ -50,34 +50,32 @@ new class extends Component {
 
         $this->reset('avatar');
 
-        $this->alert('Збережено');
+        $this->alert('Updated');
     }
 } ?>
 
-<x-ui::section title="Редагування профілю">
+<x-ui::section title="Profile edit">
     <form wire:submit="submit" class="flex flex-col gap-3">
-        <x-ui::field label="Фото" hint="На згадку про вас">
+        <x-ui::field label="Photo" hint="In memory of you">
             <input type="file" wire:model="avatar" class="input file" />
             @error('avatar')
                 <div class="validation-error">{{ $message }}</div>
             @enderror
         </x-ui::field>
 
-        <x-ui::field wire:model="name" label="Ім'я та прізвище" hint="Вказуйте ім'я одержувача товару" max="64">
+        <x-ui::field wire:model="name" label="Name" hint="Please indicate the first and last name of the recipient of the goods" max="64">
             <x-ui::input
                 x-model="field"
-                placeholder="Іванов Іван Іванович"
                 maxlength="64"
                 max="64"
                 required
             />
         </x-ui::field>
 
-        <x-ui::field wire:model="email" label="Email" hint="Жодного спаму та рекламних листів, тільки для зв'язку" max="64">
+        <x-ui::field wire:model="email" label="Email" max="64">
             <x-ui::input
                 type="email"
                 x-model="field"
-                placeholder="example@gmail.com"
                 maxlength="64"
                 max="64"
                 required
@@ -85,7 +83,7 @@ new class extends Component {
         </x-ui::field>
 
         <div class="flex fle-row justify-end">
-            <x-ui::button type="submit">Зберегти</x-ui::button>
+            <x-ui::button type="submit">Save</x-ui::button>
         </div>
     </form>
 </x-ui::section>

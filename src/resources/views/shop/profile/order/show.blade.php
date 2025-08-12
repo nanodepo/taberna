@@ -1,6 +1,5 @@
 <?php
 
-use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 use NanoDepo\Taberna\Models\Order;
 
@@ -16,11 +15,11 @@ new class extends Component {
 <x-ui::layout.double>
     <x-slot name="breadcrumbs">
         <x-ui::breadcrumbs>
-            <x-ui::breadcrumbs.item :href="route('profile.show')">Особистий кабінет</x-ui::breadcrumbs.item>
+            <x-ui::breadcrumbs.item :href="route('profile.show')">Profile</x-ui::breadcrumbs.item>
             <x-ui::breadcrumbs.divider />
-            <x-ui::breadcrumbs.item :href="route('profile.order.index')">Історія замовлень</x-ui::breadcrumbs.item>
+            <x-ui::breadcrumbs.item :href="route('profile.order.index')">Orders history</x-ui::breadcrumbs.item>
             <x-ui::breadcrumbs.divider />
-            <x-ui::breadcrumbs.item active>Замовлення</x-ui::breadcrumbs.item>
+            <x-ui::breadcrumbs.item active>Order</x-ui::breadcrumbs.item>
         </x-ui::breadcrumbs>
     </x-slot>
 
@@ -30,30 +29,33 @@ new class extends Component {
 
     <x-slot name="right">
         @foreach($order->items as $item)
-            <x-ui::section title="Товар #{{ $loop->iteration }}">
+            <x-ui::section title="Product #{{ $loop->iteration }}">
                 <x-ui::list>
-                    <x-ui::list.icon
-                        icon="cube"
+                    <x-ui::list.double
+                        before="cube"
                         :title="$item->product_name_at_purchase"
+                        after="arrow-long-right"
+                        :href="$item->variant ? route('variant', [$item->product->category->slug, $item->product->sku, $item->variant->sku]) : route('product', [$item->product->category->slug, $item->product->sku])"
                     />
 
                     <x-ui::list.value
                         icon="square-3-stack-3d"
-                        title="Кількість"
+                        title="Quantity"
                     >
                         {{ $item->quantity }}
                     </x-ui::list.value>
 
                     <x-ui::list.value
                         icon="banknotes"
-                        title="Ціна"
+                        title="Price"
+                        accent
                     >
                         {{ price($item->price_at_purchase)->formatted() }}
                     </x-ui::list.value>
 
                     <x-ui::list.value
                         icon="receipt-percent"
-                        title="Знижка"
+                        title="Discount"
                     >
                         {{ price($item->discount_at_purchase)->formatted() }}
                     </x-ui::list.value>
@@ -61,13 +63,14 @@ new class extends Component {
                 </x-ui::list>
 
                 @if($item->addons->isNotEmpty())
-                    <x-ui::title title="Доповнення" class="my-3" />
+                    <x-ui::title title="Addons" class="my-3" />
 
                     <x-ui::list>
                         @foreach($item->addons as $addon)
                             <x-ui::list.value
                                 icon="squares-plus"
                                 :title="$addon->pivot->addon_name_at_purchase"
+                                accent
                             >
                                 {{ price($addon->pivot->price_at_purchase)->formatted() }}
                             </x-ui::list.value>

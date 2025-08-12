@@ -29,6 +29,7 @@
         label="Basket"
         :href="route('basket')"
         :active="request()->routeIs('basket')"
+        :badge="session()->has('basket') ? count(session()->get('basket')) : null"
         wire:navigate
     />
 </x-ui::nav.bar>

@@ -41,7 +41,7 @@ class CreateOrderAction
             $itemPrice = is_null($item->variant) ? ($item->product->price - $item->product->discount) : ($item->variant->price - ($item->variant->discount ?? $item->product->discount));
             $itemPrice = $itemPrice * $item->quantity;
             if (is_iterable($item->addons)) {
-                $itemPrice = $itemPrice + $item->addons->sum('price');
+                $itemPrice = ($itemPrice + $item->addons->sum('price')) * $item->quantity;
             }
             $price += $itemPrice;
         }
@@ -76,7 +76,7 @@ class CreateOrderAction
                 $item->addons()->attach($addon->id, [
                     'addon_name_at_purchase' => $addon->name,
                     'price_at_purchase' => $addon->price,
-                    'quantity' => 1,
+                    'quantity' => $item->quantity,
                 ]);
             }
         }
